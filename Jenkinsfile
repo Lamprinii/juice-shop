@@ -1,6 +1,6 @@
 node {
   stage('Nmap Scan') {
-     sh "nmap -sV -T4 -A -v --script vuln 192.168.1.2 "              
+     sh "nmap -sV -T4 -A -v -Pn --script vuln 192.168.1.2 "              
 
         }
   
