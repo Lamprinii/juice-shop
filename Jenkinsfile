@@ -1,12 +1,20 @@
 node {
-  stage('Nmap Scan') {
-     sh "nmap -sV -T4 -A -v -Pn --script vuln 192.168.1.2 "              
+  stage('SCM') {
 
-        }
-  
-stage('SQLMap Scan') {
-            sh "sqlmap -u http://192.168.1.2:8089/getAllBooks --batch --dbs"
+    checkout scm
 
-            
-        }  
+  }
+
+  stage('SonarQube Analysis') {
+
+    def scannerHome = tool 'Asfalis_Sonarqube';
+
+    withSonarQubeEnv() {
+
+      sh "${scannerHome}/bin/sonar-scanner"
+
+    }
+
+  }
+ 
 }
